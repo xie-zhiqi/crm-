@@ -1,0 +1,28 @@
+.icon {
+    width: 2em;
+    height: 2em;
+    vertical-align: -0.5em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+body {
+    margin: 0
+}
+
+html, body, #app, .el-container {
+    height: 100%
+}
+
+#nprogress .bar {
+    /*进度条样式*/
+    background: rgb(0, 183, 255) !important;
+    height:20px !important;
+}
+
+.spinner-icon {
+    /*圆圈样式*/
+    border-top-color: #f56c6c !important;
+    border-left-color: #003df1 !important;
+}
+
