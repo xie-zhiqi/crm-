@@ -8,7 +8,7 @@
       loop="loop"
       autoplay="true"
     ></video>
-    <div class="bj2"></div>
+    <!-- <div class="bj2"></div> -->
 
     <div class="inputbox">
       <h1 class="title">CRM管理系统</h1>
@@ -158,6 +158,7 @@ export default {
         width: 250px;
       }
     }
+
     /deep/.el-form-item__label {
       color: white !important;
     }
@@ -166,6 +167,7 @@ export default {
       position: relative;
       left: 1%;
       width: 240px;
+      background-image: linear-gradient(to right, #408af4, #1c44f5);
     }
   }
 
