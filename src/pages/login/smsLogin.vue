@@ -1,11 +1,11 @@
 <template>
     <!-- 短信验证码登录 -->
     <div>
-        <div class="jiaobiao">
+        <!-- <div class="jiaobiao">
             <svg class="icon-jiaobiao" aria-hidden="true">
                 <use xlink:href="#icon-erweimajiaobiao"></use>
             </svg>
-        </div>
+        </div> -->
         <h1 class="title">短信登入</h1>
         <el-form-item label="手机号">
             <el-input maxlength="11" class="captcha1" type="text" v-model="loginForm.password" autocomplete="off">
@@ -30,6 +30,9 @@ export default {
                 captcha: ""
             }
         }
+    },
+    methods: {
+        
     }
 }
 </script>

@@ -38,11 +38,21 @@
   </div>
 </template>
 <script>
+  import * as api from "@/api/users"
 export default {
+  created() {
+    this.updateCaptcha()
+  },
+  mounted() {
+    api.getCaptcha()
+      .then(res => {
+      console.log(res)
+    })
+  },
   data() {
     return {
       loading: "",
-      captchaSvg: "",
+      captchaSvg: "",  // 验证码
       loginForm: {
         username: "",
         password: "",
@@ -62,11 +72,17 @@ export default {
     }
   },
   methods: {
+
     submitForm(formName) {
-      console.log(formName)
+      // console.log(formName)
+      this.$emit("submit")
     },
+
     updateCaptcha() {
-      console.log(短信验证)
+      api.getCaptcha()
+        .then(res => {
+        this.captchaSvg = res.data.img
+      })
     }
   }
 }

@@ -4,13 +4,18 @@
     <div class="bj2"></div>
     <div class="inputbox">
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
-      <!-- 常规登录 -->
-        <!-- <CommonLogin @syncLoginFrom="handlesyncLoginFrom"></CommonLogin> -->
+        <!-- 常规登录 -->
+        <CommonLogin @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin>
         <!-- 二维码登录 -->
         <!-- <Erwei></Erwei> -->
         <!-- 短信登录 -->
-        <SmsLogin></SmsLogin>
+        <!-- <SmsLogin></SmsLogin> -->
       </el-form>
+      <i class="icon-jiaobiao">
+        <svg class="icon-jiaobiao1" aria-hidden="true">
+          <use xlink:href="#icon-erweimajiaobiao"></use>
+        </svg>
+      </i>
     </div>
 
 
@@ -95,6 +100,7 @@ var validatepassword = (rule, value, callback) => {
     callback("密码应不少于3位");
   }
 };
+import * as api from "@/api/users"
 export default {
   components: { CommonLogin, Erwei, SmsLogin },
   data() {
@@ -116,9 +122,26 @@ export default {
     handlesyncLoginFrom(newVal) {
       console.log(newVal)
       this.loginForm = newVal
-    }
-  },
-};
+    },
+    submit(formName) {
+      // 登入
+      // 1.获取后台的验证码
+      // 2.进行本地校验
+      // 3.本地校验通过=>先校验验证码
+      // 4.验证码通过再校验用户名和密码
+      // 5.返回成功或失败
+      this.$refs['loginForm'].validate((valid) => {
+        if (valid) {
+          // 本地校验通过
+          alert('submit!');
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -217,5 +240,24 @@ export default {
     top: -13%;
     color: white;
   }
+
+  .icon-jiaobiao {
+    font-size: 60px;
+    color: #fff;
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    cursor: pointer;
+    opacity: 0.7;
+
+    .icon-jiaobiao1 {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  // .jiaobiaoya{
+  //   font-size: 60px;
+  // }
 }
 </style>
