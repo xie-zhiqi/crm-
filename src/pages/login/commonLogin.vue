@@ -78,6 +78,7 @@ export default {
       this.$emit("submit")
     },
 
+    // 获取验证码图片
     updateCaptcha() {
       api.getCaptcha()
         .then(res => {

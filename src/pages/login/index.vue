@@ -5,7 +5,7 @@
     <div class="inputbox">
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
         <!-- 常规登录 -->
-        <CommonLogin @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin>
+        <CommonLogin ref="componLogin" @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin>
         <!-- 二维码登录 -->
         <!-- <Erwei></Erwei> -->
         <!-- 短信登录 -->
@@ -73,6 +73,7 @@
 import CommonLogin from "./commonLogin.vue"
 import Erwei from "./qrLogin.vue"
 import SmsLogin from "./smsLogin.vue";
+// import * as api from "../../api/users"
 // 校验验证码
 var validatecaptcha = (rule, value, callback) => {
   var reg = /^[a-zA-Z0-9]{5,5}$/;
@@ -120,7 +121,7 @@ export default {
   },
   methods: {
     handlesyncLoginFrom(newVal) {
-      console.log(newVal)
+      // console.log(newVal)
       this.loginForm = newVal
     },
     submit(formName) {
@@ -133,7 +134,16 @@ export default {
       this.$refs['loginForm'].validate((valid) => {
         if (valid) {
           // 本地校验通过
-          alert('submit!');
+          // alert('submit!');
+          api.verification(this.loginForm.captcha)
+            .then(res => {
+              console.log(res)
+              if (res.data.state) {
+                // 验证码通过
+              } else {
+                this.$refs['componLogin'].updateCaptcha()
+              }
+          })
         } else {
           console.log('error submit!!');
           return false;
