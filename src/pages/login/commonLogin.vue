@@ -46,7 +46,7 @@ export default {
   mounted() {
     api.getCaptcha()
       .then(res => {
-      console.log(res)
+      // console.log(res)
     })
   },
   data() {

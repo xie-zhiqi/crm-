@@ -136,10 +136,16 @@ export default {
           // 本地校验通过
           // alert('submit!');
           api.verification(this.loginForm.captcha)
-            .then(res => {
+            .then(async res => {
               console.log(res)
               if (res.data.state) {
-                // 验证码通过
+                // 验证码通过，首先先校验本地的表单验证，然后校验验证码，在验证码的内部设置一个if else然后 验证码校验通过的话 调用接口传参 再去校验用户名的账户和密码
+                let { username, password } = this.loginForm
+                let res = await api.loginApi(username, password)
+                console.log(res)
+                if (res.data.status) {
+                  this.storageUserInfo(res.data)
+                }
               } else {
                 this.$refs['componLogin'].updateCaptcha()
               }
@@ -150,6 +156,40 @@ export default {
         }
       });
     },
+    // 封装一个方法用于存储用户信息
+    storageUserInfo(res) {
+      let { token, userInfo, permission } = res;
+      
+    },
+    // 封装一个方法
+    storage() {
+      // 存需要转换为json
+      let set = (key, value) => {
+        console.log(key, value)
+        if (key && value) {
+          // 吧value转换为json
+          try {
+            let json = JSON.stringify(value)
+            localStorage.setItem(key,value)
+          } catch (e) {
+            console.error(e)
+          }
+        } else {
+          console.error("key 和 value 必须传")
+        }
+      }
+      // 取需要转换为正常的对象
+      let get = (key, value) => {
+        let res = localStorage.getItem(key);
+        try {
+          let result = JSON.parse(res)
+          return result
+        } catch (e) {
+          console.log(e)
+          return null
+        }
+      }
+    }
   }
 }
 </script>
