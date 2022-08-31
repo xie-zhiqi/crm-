@@ -144,12 +144,14 @@ export default {
                 let res = await api.loginApi(username, password)
                 console.log(res)
                 if (res.data.status) {
+                  // 把用户的信息存储到本地
                   this.storageUserInfo(res.data)
+                  this.$router.push("/home")
                 }
               } else {
                 this.$refs['componLogin'].updateCaptcha()
               }
-          })
+            })
         } else {
           console.log('error submit!!');
           return false;
@@ -157,20 +159,22 @@ export default {
       });
     },
     // 封装一个方法用于存储用户信息
-    storageUserInfo(res) {
-      let { token, userInfo, permission } = res;
-      
+    storageUserInfo({ userInfo, token, permission }) {
+      this.storage().set("userInfo", userInfo)
+      let r = this.storage().get("userInfo")
+      // console.log(r)
     },
     // 封装一个方法
     storage() {
       // 存需要转换为json
       let set = (key, value) => {
-        console.log(key, value)
+        // console.log(key, value)
         if (key && value) {
           // 吧value转换为json
           try {
-            let json = JSON.stringify(value)
-            localStorage.setItem(key,value)
+            localStorage.setItem(key,JSON.stringify(value))
+            // localStorage.setItem(key, json)
+            // console.log(key,value)
           } catch (e) {
             console.error(e)
           }
@@ -188,6 +192,10 @@ export default {
           console.log(e)
           return null
         }
+      }
+      return {
+        set,
+        get
       }
     }
   }
