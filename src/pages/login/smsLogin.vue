@@ -10,7 +10,7 @@
         <el-form-item label="手机号">
             <el-input maxlength="11" class="captcha1" type="text" v-model="loginForm.password" autocomplete="off">
             </el-input>
-            <span class="captcha-svg"><a href="#">点击获取二维码</a></span>
+            <span class="captcha-svg" v-text="msg" @click="sendSms" ></span>
         </el-form-item>
         <el-form-item label="验证码">
             <el-input type="text" v-model.number="loginForm.captcha"></el-input>
@@ -27,13 +27,32 @@ export default {
         return {
             loginForm: {
                 password: "",
-                captcha: ""
-            }
+                captcha: "",
+            },
+            msg: "点击发送验证码",
+            flag: true,
         }
     },
     methods: {
-        
+        sendSms() {
+            if (this.flag) {
+                this.flag = false;
+                let delay = 5
+                this.msg = `${delay}秒后重新发送`
+                this.inteval = setInterval(() => {
+                    delay--
+                    if (delay < 1) {
+                        this.msg = "点击发送验证码"
+                        clearTimeout(this.inteval)
+                        this.flag = true;
+                    } else {
+                        this.msg = `${delay}秒后重新发送`
+                    }
+                }, 1000)
+            }
+        }
     }
+
 }
 </script>
 
@@ -158,6 +177,7 @@ export default {
         border-bottom-right-radius: 4px !important;
         text-align: center;
         cursor: pointer;
+        user-select: none;
 
         a {
             color: #4a3f3f;
@@ -168,7 +188,8 @@ export default {
     .jiaobiao {
         // width: 50px;
         // height: 50px;
-    color: #1c44f5;
+        color: #1c44f5;
+
         .icon-jiaobiao {
             width: 80px;
             height: 80px;
