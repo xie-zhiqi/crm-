@@ -25,6 +25,7 @@
 export default {
     data() {
         return {
+            adin:,
             loginForm: {
                 password: "",
                 captcha: "",
