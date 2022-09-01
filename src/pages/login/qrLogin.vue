@@ -2,13 +2,101 @@
     <!-- 二维码登录 -->
     <div>
         <h1 class="title">微信扫码登入</h1>
-        <div class="erwei" v-loading="true">
-            <img width="200px" src="../../assets/img/invalidQr.png" alt="">
-            <i class="mask"></i>
+        <div class="erwei" v-loading="false">
+            <img width="200px" :src="qrimg">
+            <i class="mask" v-if="showMain" @click="updataQr" :style="maskBg"></i>
         </div>
-        <div class="wenzi">请使用微信扫码登入</div>
+        <div class="title-tubiao">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-weixin"></use>
+            </svg>
+            <!-- <i class="icon-shouji"></i> -->
+            <div class="wenzi">请使用微信扫码登入</div>
+        </div>
     </div>
 </template>
+
+<script>
+// 引入socket.io
+import socketIo from "socket.io-client";
+// 引入qrcode
+import qrcode from "qrcode"
+import * as api from "@/api/users"
+
+// 引入成功和失败遮罩图片
+import lose from "@/assets/img/invalidQr.png"
+import succeed from "@/assets/img/scancode.png"
+import storage from "@/utils/storage"
+export default {
+    props: {
+        storage: {
+            // required:true
+        }
+    },
+    data() {
+        return {
+            qrimg: "",
+            showMain: false,
+            maskBg: { backgroundImage: `url(${succeed})` },//扫码成功
+
+            // maskBgInvalid:{background:url(reaspone)} // 二维码失效
+        }
+    },
+    created() {
+        // 获取sid
+        // console.log(this.storage)
+        let io = socketIo("wss://chst.vip")
+        io.on("connectSuccess", ({ sid }) => {
+            storage.set("sid", sid)
+            this.getQrUrl(sid)
+        })
+        // 二维码失效
+        io.on("invalidCode", data => {
+            console.log(data)
+            this.showMain = true;
+            this.maskBg.backgroundImage = `url(${lose})`
+        })
+        // 扫码成功
+        io.on("scancodeSuccess", (data) => {
+            console.log(data)
+            api.wechaLoginApi(data.wechatCode)
+                .then(res => {
+                    console.log(res)
+                    this.showMain = true
+                    this.maskBg.backgroundImage = `url(${succeed})`
+                    this.storage(res.data)
+                    this.$router.push("/home")
+
+
+                })
+        })
+    },
+    methods: {
+        getQrUrl(sid) {
+            api.getQrcode(sid)
+                .then(res => {
+                    console.log(res)
+                    let { scanCodeUrl } = res.data
+                    qrcode.toDataURL(scanCodeUrl, (err, img) => {
+                        if (err) {
+                            throw err
+                        }
+                        this.qrimg = img
+                    })
+                })
+        },
+        updataQr() {
+            let sid = storage.get("sid")
+            console.log(sid)
+            this.getQrUrl(sid)
+            this.showMain = false
+        }
+    }
+    //
+}
+
+</script>
+
 
 <style scoped lang="less">
 .conter {
@@ -90,7 +178,7 @@
     .erwei {
         width: 200px;
         height: 200px;
-        background-color: rebeccapurple;
+        background-color: rgb(254, 253, 255);
         position: relative;
         left: 26%;
         top: -5%;
@@ -107,13 +195,25 @@
         color: white;
     }
 
-    .wenzi{
-        margin-top: 10px;
+    .wenzi {
+        margin-top: 0px;
     }
-    .mask{
-        background-image: "../../assets/img/scancode.png";
+
+    .mask {
+        display: block;
+        position: absolute;
+        top: 0px;
+        opacity: 0.9;
+        background: rgb(248, 239, 239);
         width: 200px;
         height: 200px;
+    }
+
+    .title-tubiao {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 </style>

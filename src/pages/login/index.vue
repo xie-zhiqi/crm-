@@ -5,11 +5,11 @@
     <div class="inputbox">
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
         <!-- 常规登录 -->
-        <CommonLogin ref="componLogin" @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin>
+        <!-- <CommonLogin ref="componLogin" @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin> -->
         <!-- 二维码登录 -->
-        <!-- <Erwei></Erwei> -->
+        <!-- <Erwei :storage="storageUserInfo"></Erwei> -->
         <!-- 短信登录 -->
-        <!-- <SmsLogin></SmsLogin> -->
+        <SmsLogin></SmsLogin>
       </el-form>
       <i class="icon-jiaobiao">
         <svg class="icon-jiaobiao1" aria-hidden="true">
@@ -73,6 +73,7 @@
 import CommonLogin from "./commonLogin.vue"
 import Erwei from "./qrLogin.vue"
 import SmsLogin from "./smsLogin.vue";
+import storage from "@/utils/storage"
 // import * as api from "../../api/users"
 // 校验验证码
 var validatecaptcha = (rule, value, callback) => {
@@ -160,44 +161,13 @@ export default {
     },
     // 封装一个方法用于存储用户信息
     storageUserInfo({ userInfo, token, permission }) {
-      this.storage().set("userInfo", userInfo)
-      let r = this.storage().get("userInfo")
+      storage.set("userInfo", userInfo)
+      storage.set("token", token)
+      storage.set("permission", permission)
+      // let r = storage.get("userInfo")
       // console.log(r)
     },
-    // 封装一个方法
-    storage() {
-      // 存需要转换为json
-      let set = (key, value) => {
-        // console.log(key, value)
-        if (key && value) {
-          // 吧value转换为json
-          try {
-            localStorage.setItem(key,JSON.stringify(value))
-            // localStorage.setItem(key, json)
-            // console.log(key,value)
-          } catch (e) {
-            console.error(e)
-          }
-        } else {
-          console.error("key 和 value 必须传")
-        }
-      }
-      // 取需要转换为正常的对象
-      let get = (key, value) => {
-        let res = localStorage.getItem(key);
-        try {
-          let result = JSON.parse(res)
-          return result
-        } catch (e) {
-          console.log(e)
-          return null
-        }
-      }
-      return {
-        set,
-        get
-      }
-    }
+
   }
 }
 </script>

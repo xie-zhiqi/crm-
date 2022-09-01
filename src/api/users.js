@@ -19,3 +19,16 @@ export let loginApi = (username, password) => http.post("/users/login", {
     password
 })
 
+// 获取二维码
+export let getQrcode = sid => http.get("/users/getQrcode", {
+    params: {
+        sid
+    }
+})
+
+// 二维码登入
+export let wechaLoginApi = wechatCode => http.get("/users/wechatLogin", {
+    params: {
+        wechatCode
+    }
+})
