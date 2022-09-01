@@ -5,19 +5,31 @@
     fill: currentColor;
     overflow: hidden;
 }
-
 body {
     margin: 0
 }
 
-html, body, #app, .el-container {
+/* @font-face {
+    font-family: 'iconfont';
+    src: url('iconfont.eot');
+    src: url('iconfont.eot?#iefix') format('embedded-opentype'),
+        url('iconfont.woff') format('woff'),
+        url('iconfont.ttf') format('truetype'),
+        url('iconfont.svg#iconfont') format('svg');
+} */
+
+
+html,
+body,
+#app,
+.el-container {
     height: 100%
 }
 
 #nprogress .bar {
     /*进度条样式*/
     background: rgb(0, 183, 255) !important;
-    height:20px !important;
+    height: 20px !important;
 }
 
 .spinner-icon {
@@ -25,4 +37,3 @@ html, body, #app, .el-container {
     border-top-color: #f56c6c !important;
     border-left-color: #003df1 !important;
 }
-

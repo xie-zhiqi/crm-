@@ -138,6 +138,7 @@ export default {
     .title {
         text-align: center;
         color: white;
+        margin-bottom: 40px;
     }
 
     .qiehuan {

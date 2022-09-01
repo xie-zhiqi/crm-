@@ -5,19 +5,16 @@
     <div class="inputbox">
       <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm">
         <!-- 常规登录 -->
-        <!-- <CommonLogin ref="componLogin" @submit="submit" @syncLoginFrom="handlesyncLoginFrom"></CommonLogin> -->
+        <CommonLogin v-if="loginType === 'common'" ref="componLogin" @submit="submit"
+          @syncLoginFrom="handlesyncLoginFrom" @changeSmsType="changeSmsType"></CommonLogin>
         <!-- 二维码登录 -->
-        <!-- <Erwei :storage="storageUserInfo"></Erwei> -->
+        <Erwei v-else-if="loginType === 'qrcode'" :storage="storageUserInfo"></Erwei>
         <!-- 短信登录 -->
-        <SmsLogin :storageUserInfo="storageUserInfo"></SmsLogin>
+        <SmsLogin v-else :storageUserInfo="storageUserInfo"></SmsLogin>
       </el-form>
-      <i class="icon-jiaobiao">
-        <svg class="icon-jiaobiao1" aria-hidden="true">
-          <use xlink:href="#icon-erweimajiaobiao"></use>
-        </svg>
-      </i>
-    </div>
 
+      <i @click="changeLogin" :class="['icon-jiaobiao', 'iconfont', jiaobiaoType]"></i>
+    </div>
 
     <!-- 常规登录 -->
     <!-- <div class="inputbox">
@@ -70,6 +67,7 @@
 </template>
 
 <script>
+
 import CommonLogin from "./commonLogin.vue"
 import Erwei from "./qrLogin.vue"
 import SmsLogin from "./smsLogin.vue";
@@ -105,8 +103,18 @@ var validatepassword = (rule, value, callback) => {
 import * as api from "@/api/users"
 export default {
   components: { CommonLogin, Erwei, SmsLogin },
+  computed: {
+    jiaobiaoType() {
+      if (this.loginType == "common") {
+        return "icon-erweimajiaobiao"
+      } else if (this.loginType === "qrcode" || this.loginType == "sms") {
+        return "icon-diannaojiaobiao"
+      }
+    }
+  },
   data() {
     return {
+      loginType: "common", // 默认是常规登录,
       title: "CRM管理系统",
       loginForm: {
         username: "",
@@ -121,6 +129,20 @@ export default {
     };
   },
   methods: {
+    changeSmsType() {
+      this.loginType = "sms"
+    },
+    // 更改登录方式
+
+    changeLogin() {
+      // console.log(1)
+      if (this.loginType == "common") {
+        this.loginType = "qrcode"
+      } else if (this.loginType == "qrcode" || this.loginType == "sms") {
+        this.loginType = "common"
+      }
+    },
+    // 
     handlesyncLoginFrom(newVal) {
       // console.log(newVal)
       this.loginForm = newVal
@@ -271,17 +293,14 @@ export default {
 
   .icon-jiaobiao {
     font-size: 60px;
-    color: #fff;
+    color: rgb(223, 216, 216);
     position: absolute;
     right: -1px;
     top: -1px;
     cursor: pointer;
     opacity: 0.7;
+    font-size: 60px;
 
-    .icon-jiaobiao1 {
-      width: 80px;
-      height: 80px;
-    }
   }
 
   // .jiaobiaoya{

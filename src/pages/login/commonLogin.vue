@@ -6,11 +6,11 @@
     <!-- <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px" class="demo-loginForm"> -->
 
     <el-form-item label="账号" prop="username">
-      <el-input type="text" v-model="loginForm.username" autocomplete="off"></el-input>
+      <el-input maxlength="13" type="text" v-model="loginForm.username" autocomplete="off"></el-input>
     </el-form-item>
 
     <el-form-item label="密码" prop="password">
-      <el-input type="password" v-model="loginForm.password" autocomplete="off"></el-input>
+      <el-input  maxlength="13" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
     </el-form-item>
 
     <el-form-item label="验证码" prop="captcha">
@@ -32,7 +32,8 @@
     <!-- </div> -->
     <div>
       <div class="sms">
-        <a href="javascript:" @click="isSmsLogin = true" style="color:#fff; font-size: 16px;">点击切换短信等</a>
+        <i class="iconfont icon-wode1 tubiao1"></i>
+        <a href="javascript:" @click="$emit('changeSmsType')" style="color:#fff; font-size: 16px;">点击切换短信登录</a>
       </div>
     </div>
   </div>
@@ -150,7 +151,7 @@ export default {
 
   .title {
     text-align: center;
-
+    margin-bottom: 40px;
     color: white;
   }
 
@@ -222,6 +223,10 @@ export default {
       width: 100%;
       height: 100%;
     }
+  }
+  .tubiao1{
+    color: #fff;
+    margin-left: 1px;
   }
 
 }
