@@ -8,28 +8,35 @@
         </div> -->
         <h1 class="title">短信登入</h1>
         <el-form-item label="手机号">
-            <el-input maxlength="11" class="captcha1" type="text" v-model="loginForm.password" autocomplete="off">
+            <el-input maxlength="11" class="captcha1" type="text" v-model="phone" autocomplete="off">
             </el-input>
-            <span class="captcha-svg" v-text="msg" @click="sendSms" ></span>
+            <span class="captcha-svg" v-text="msg" @click="sendSms"></span>
         </el-form-item>
         <el-form-item label="验证码">
-            <el-input type="text" v-model.number="loginForm.captcha"></el-input>
+            <el-input maxlength="5" type="text" v-model="code"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-button class="submit" type="primary" @click="submitForm('loginForm')">提交</el-button>
+            <el-button class="submit" type="primary" @click="submit">提交</el-button>
         </el-form-item>
     </div>
 </template>
 
 <script>
+import * as api from "@/api/users"
 export default {
+    props: {
+        storageUserInfo: {
+            require:true
+        }
+    },
+    created() {
+        // console.log(this.storageUserInfo)
+
+    },
     data() {
         return {
-            adin:,
-            loginForm: {
-                password: "",
-                captcha: "",
-            },
+            phone: "",
+            code: "",
             msg: "点击发送验证码",
             flag: true,
         }
@@ -37,6 +44,10 @@ export default {
     methods: {
         sendSms() {
             if (this.flag) {
+                api.getsmsCode(this.phone)
+                    .then(res => {
+                        console.log(res)
+                    })
                 this.flag = false;
                 let delay = 5
                 this.msg = `${delay}秒后重新发送`
@@ -51,6 +62,13 @@ export default {
                     }
                 }, 1000)
             }
+        },
+        async submit() {
+            let res = await api.smsLogin(this.code)
+            console.log(res)
+            // 调用父组件的方法 存储用户信息
+            this.storageUserInfo(res.data)
+            this.$router.push("/home")
         }
     }
 

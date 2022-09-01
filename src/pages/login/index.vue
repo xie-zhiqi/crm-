@@ -9,7 +9,7 @@
         <!-- 二维码登录 -->
         <!-- <Erwei :storage="storageUserInfo"></Erwei> -->
         <!-- 短信登录 -->
-        <SmsLogin></SmsLogin>
+        <SmsLogin :storageUserInfo="storageUserInfo"></SmsLogin>
       </el-form>
       <i class="icon-jiaobiao">
         <svg class="icon-jiaobiao1" aria-hidden="true">

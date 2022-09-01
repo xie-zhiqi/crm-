@@ -32,3 +32,14 @@ export let wechaLoginApi = wechatCode => http.get("/users/wechatLogin", {
         wechatCode
     }
 })
+
+// 获取手机验证码
+export let getsmsCode = phoneNumber => http.post("/sms/send", {
+    phoneNumber
+})
+
+
+// 手机验证码登入
+export let smsLogin = code => http.post("/users/login?type=sms", {
+    code
+})
