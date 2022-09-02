@@ -1,10 +1,12 @@
 <template>
-    <el-row type="flex" class="row-bg" justify="space-around">
+    <el-row type="flex" class="row-bg">
         <el-col :span="6">
             <div class="grid-content bg-purple"></div>
         </el-col>
         <el-col :span="6">
-            <div class="grid-content bg-purple-light"></div>
+            <div class="grid-content bg-purple-light">
+                <h1>CRM管理系统</h1>
+            </div>
         </el-col>
         <el-col :span="6">
             <div class="grid-content bg-purple"></div>
@@ -25,7 +27,7 @@
 }
 
 .bg-purple-dark {
-    background: #99a9bf;
+    background: #082245;
 }
 
 .bg-purple {
@@ -33,7 +35,9 @@
 }
 
 .bg-purple-light {
-    background: #e5e9f2;
+    // background: #e5e9f2;
+    color: white;
+    font-size: 25px;
 }
 
 .grid-content {
@@ -42,7 +46,10 @@
 }
 
 .row-bg {
+    // background: linear-gradient(cyan, black);
     padding: 10px 0;
-    background-color: #f9fafc;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
 }
 </style>

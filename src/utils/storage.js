@@ -28,12 +28,3 @@ export default {
     get,
     set
 }
-
-// export let storage = () => {
-//     // 存需要转换为json
-
-//     return {
-//         set,
-//         get
-//     }
-// }

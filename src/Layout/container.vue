@@ -23,7 +23,8 @@ export default {
 <style scoped>
 .el-header,
 .el-footer {
-    background-color: #B3C0D1;
+    /* background: linear-gradient(cyan, black); */
+    background: linear-gradient(135deg, #4c67ff, #5635df);
     color: #333;
     text-align: center;
     line-height: 60px;
