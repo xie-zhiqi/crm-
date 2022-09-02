@@ -1,5 +1,6 @@
 // 配置axios
 import axios from "axios"
+import { Message, MessageBox } from 'element-ui';
 
 let http = axios.create({
     baseURL: "/api",
@@ -9,7 +10,7 @@ let http = axios.create({
 })
 
 // 全局请求拦截拦截器  对接口的请求批量进行统一处理
-axios.interceptors.request.use(config => {
+http.interceptors.request.use(config => {
     // config就是所有的请求配置
     return config // 放行
 })
@@ -17,7 +18,20 @@ axios.interceptors.request.use(config => {
 
 // 全局响应拦截 统一对错误进行处理
 
-axios.interceptors.response.use(config => { 
+http.interceptors.response.use(config => {
+
+    // console.log("config", config)
+    let { msg, state } = config.data
+    if (config.data.msg) {
+        if (!state) {
+            MessageBox({
+                title: "错误",
+                type: "error",
+                message: msg
+            })
+        }
+    }
+
     return config // 如果不retrun axios请求就拿不到响应结果
 })
 

@@ -2,7 +2,7 @@
     <!-- 二维码登录 -->
     <div>
         <h1 class="title">微信扫码登入</h1>
-        <div class="erwei" v-loading="false">
+        <div class="erwei" v-loading="loading">
             <img width="200px" :src="qrimg">
             <i class="mask" v-if="showMain" @click="updataQr" :style="maskBg"></i>
         </div>
@@ -10,7 +10,6 @@
             <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-weixin"></use>
             </svg>
-            <!-- <i class="icon-shouji"></i> -->
             <div class="wenzi">请使用微信扫码登入</div>
         </div>
     </div>
@@ -35,6 +34,7 @@ export default {
     },
     data() {
         return {
+            loading: "",
             qrimg: "",
             showMain: false,
             maskBg: { backgroundImage: `url(${succeed})` },//扫码成功
@@ -61,27 +61,26 @@ export default {
             console.log(data)
             api.wechaLoginApi(data.wechatCode)
                 .then(res => {
-                    console.log(res)
+                    // console.log(res)
                     this.showMain = true
                     this.maskBg.backgroundImage = `url(${succeed})`
                     this.storage(res.data)
                     this.$router.push("/home")
-
-
                 })
         })
     },
     methods: {
         getQrUrl(sid) {
+            this.loading = true;
             api.getQrcode(sid)
                 .then(res => {
-                    console.log(res)
                     let { scanCodeUrl } = res.data
                     qrcode.toDataURL(scanCodeUrl, (err, img) => {
                         if (err) {
                             throw err
                         }
                         this.qrimg = img
+                        this.loading = false;
                     })
                 })
         },

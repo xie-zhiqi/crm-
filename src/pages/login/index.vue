@@ -135,7 +135,6 @@ export default {
     // 更改登录方式
 
     changeLogin() {
-      // console.log(1)
       if (this.loginType == "common") {
         this.loginType = "qrcode"
       } else if (this.loginType == "qrcode" || this.loginType == "sms") {
@@ -160,12 +159,12 @@ export default {
           // alert('submit!');
           api.verification(this.loginForm.captcha)
             .then(async res => {
-              console.log(res)
+              // console.log(res)
               if (res.data.state) {
                 // 验证码通过，首先先校验本地的表单验证，然后校验验证码，在验证码的内部设置一个if else然后 验证码校验通过的话 调用接口传参 再去校验用户名的账户和密码
                 let { username, password } = this.loginForm
                 let res = await api.loginApi(username, password)
-                console.log(res)
+                // console.log(res)
                 if (res.data.status) {
                   // 把用户的信息存储到本地
                   this.storageUserInfo(res.data)

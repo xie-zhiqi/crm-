@@ -10,7 +10,7 @@
     </el-form-item>
 
     <el-form-item label="密码" prop="password">
-      <el-input  maxlength="13" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
+      <el-input maxlength="13" type="password" v-model="loginForm.password" autocomplete="off"></el-input>
     </el-form-item>
 
     <el-form-item label="验证码" prop="captcha">
@@ -19,7 +19,7 @@
       </el-input>
 
       <span class="captcha-svg" v-loading="loading">
-        
+
         <i @click="updateCaptcha" v-html="captchaSvg"></i>
       </span>
 
@@ -39,7 +39,7 @@
   </div>
 </template>
 <script>
-  import * as api from "@/api/users"
+import * as api from "@/api/users"
 export default {
   created() {
     this.updateCaptcha()
@@ -47,8 +47,8 @@ export default {
   mounted() {
     api.getCaptcha()
       .then(res => {
-      // console.log(res)
-    })
+        // console.log(res)
+      })
   },
   data() {
     return {
@@ -81,10 +81,12 @@ export default {
 
     // 获取验证码图片
     updateCaptcha() {
+      this.loading = true
       api.getCaptcha()
         .then(res => {
-        this.captchaSvg = res.data.img
-      })
+          this.captchaSvg = res.data.img
+          this.loading = false
+        })
     }
   }
 }
@@ -219,12 +221,14 @@ export default {
     border-bottom-right-radius: 4px !important;
     text-align: center;
     cursor: pointer;
+
     /deep/img {
       width: 100%;
       height: 100%;
     }
   }
-  .tubiao1{
+
+  .tubiao1 {
     color: #fff;
     margin-left: 1px;
   }

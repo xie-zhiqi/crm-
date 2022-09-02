@@ -26,7 +26,7 @@ import * as api from "@/api/users"
 export default {
     props: {
         storageUserInfo: {
-            require:true
+            require: true
         }
     },
     created() {

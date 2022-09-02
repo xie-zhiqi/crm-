@@ -9,7 +9,7 @@ export let getCaptcha = () => http.get("/users/getCaptcha")
 
 export let verification = (captcha) => http.get("/users/verifyCaptcha", {
     params: {
-        captcha
+        captcha,
     }
 })
 
