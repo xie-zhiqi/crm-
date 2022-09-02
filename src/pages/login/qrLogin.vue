@@ -65,7 +65,7 @@ export default {
                     this.showMain = true
                     this.maskBg.backgroundImage = `url(${succeed})`
                     this.storage(res.data)
-                    this.$router.push("/home")
+                    this.$router.push("/")
                 })
         })
     },

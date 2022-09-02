@@ -168,7 +168,7 @@ export default {
                 if (res.data.status) {
                   // 把用户的信息存储到本地
                   this.storageUserInfo(res.data)
-                  this.$router.push("/home")
+                  this.$router.push("/")
                 }
               } else {
                 this.$refs['componLogin'].updateCaptcha()
