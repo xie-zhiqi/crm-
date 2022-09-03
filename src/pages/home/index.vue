@@ -1,6 +1,8 @@
 <template>
     <div class="home">
-        <layout></layout>
+        <layout>
+            <router-veive></router-veive>
+        </layout>
     </div>
 </template>
 

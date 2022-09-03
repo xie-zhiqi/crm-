@@ -3,7 +3,7 @@ import storage from "./storage"
 // 使用封装的storage方法判断存取的token 如果本地里面有token就直接使用next()放行
 router.beforeEach((to, from, next) => {
     let token = storage.get("token");
-    console.log(to)
+    // console.log(to)
     if (token) {
         next()
     } else {

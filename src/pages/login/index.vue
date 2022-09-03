@@ -68,9 +68,9 @@
 
 <script>
 
-import CommonLogin from "./commonLogin.vue"
-import Erwei from "./qrLogin.vue"
-import SmsLogin from "./smsLogin.vue";
+import CommonLogin from "@/components/login/commonLogin.vue"
+import Erwei from "@/components/login/qrLogin.vue"
+import SmsLogin from "@/components/login/smsLogin.vue"
 import storage from "@/utils/storage"
 // import * as api from "../../api/users"
 // 校验验证码
@@ -168,7 +168,7 @@ export default {
                 if (res.data.status) {
                   // 把用户的信息存储到本地
                   this.storageUserInfo(res.data)
-                  this.$router.push("/")
+                  this.$router.push("/home/welcome")
                 }
               } else {
                 this.$refs['componLogin'].updateCaptcha()
