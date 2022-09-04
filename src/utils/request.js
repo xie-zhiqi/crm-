@@ -1,7 +1,7 @@
 // 配置axios
 import axios from "axios"
 import { Message, MessageBox } from 'element-ui';
-
+import storage from "@/utils/storage"
 let http = axios.create({
     baseURL: "/api",
     // 超时设置
@@ -11,6 +11,11 @@ let http = axios.create({
 
 // 全局请求拦截拦截器  对接口的请求批量进行统一处理
 http.interceptors.request.use(config => {
+    // 先获取本地的tokne，然后携带给后端
+    let token = storage.get('token');
+    // console.log(token)
+    config.headers['Authorization'] = token;
+
     // config就是所有的请求配置
     return config // 放行
 })
