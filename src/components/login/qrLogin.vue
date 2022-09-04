@@ -7,9 +7,9 @@
             <i class="mask" v-if="showMain" @click="updataQr" :style="maskBg"></i>
         </div>
         <div class="title-tubiao">
-            <svg class="icon" aria-hidden="true">
+            <!-- <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-weixin"></use>
-            </svg>
+            </svg> -->
             <div class="wenzi">请使用微信扫码登入</div>
         </div>
     </div>
