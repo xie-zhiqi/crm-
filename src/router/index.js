@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import routess from "./generateRoutes"
+// import routess from "./generateRoutes"
 import allRouter from "@/router/staicRoutes"
+// import dynamicRoute from "./dynamicRoutes"
 Vue.use(VueRouter);
 
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
   //   component: () => import(/*webpackChunkName:"log"*/"@/pages/login"),
   // },
   // ...routess
-  ...allRouter
+  ...allRouter,
+  // dynamicRoute
 ];
 
 const router = new VueRouter({

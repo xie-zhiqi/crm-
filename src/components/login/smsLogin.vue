@@ -68,7 +68,7 @@ export default {
             console.log(res)
             // 调用父组件的方法 存储用户信息
             this.storageUserInfo(res.data)
-            this.$router.push("/home/welcome")
+            this.$router.push("/")
         }
     }
 
