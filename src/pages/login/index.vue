@@ -163,6 +163,7 @@ export default {
               if (res.data.state) {
                 // 验证码通过，首先先校验本地的表单验证，然后校验验证码，在验证码的内部设置一个if else然后 验证码校验通过的话 调用接口传参 再去校验用户名的账户和密码
                 let { username, password } = this.loginForm
+
                 let res = await api.loginApi(username, password)
                 // console.log(res)
                 if (res.data.status) {
@@ -185,8 +186,8 @@ export default {
       storage.set("userInfo", userInfo)
       storage.set("token", token)
       storage.set("permission", permission)
-      // let r = storage.get("userInfo")
-      // console.log(r)
+      // 把userInfo存到vuex里面去
+      this.$store.commit("users/SET_USERINFO", userInfo)
     },
 
   }

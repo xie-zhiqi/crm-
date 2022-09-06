@@ -11,13 +11,18 @@
         </el-col>
         <el-col :span="6">
             <div class="grid-content bg-purple">
+                <b>{{ userInfo.nickname }}</b>
                 <a href="#" @click="quit">退出</a>
             </div>
         </el-col>
     </el-row>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
+    computed: {
+        ...mapState("users", ['userInfo'])
+    },
     methods: {
         quit() {
             // 清楚token

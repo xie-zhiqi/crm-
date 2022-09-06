@@ -54,6 +54,7 @@ export default {
     return {
       loading: "",
       captchaSvg: "",  // 验证码
+      // captcha: "",
       loginForm: {
         username: "",
         password: "",
@@ -62,6 +63,7 @@ export default {
       isSmsLogin: true
     }
   },
+
   watch: {
     // 监听对象需要开启深度监听，deep:true
     loginForm: {
@@ -90,6 +92,7 @@ export default {
     }
   }
 }
+// console.log(captcha)
 </script>
 
 <style scoped lang="less">
