@@ -3,8 +3,9 @@
 </template>
 <script>
 export default {
-    meta: {
-        title: "glsy"
-    }
+    // meta: {
+    //     title: "glsy",
+    //     name: "考勤管理"
+    // }
 }
 </script>

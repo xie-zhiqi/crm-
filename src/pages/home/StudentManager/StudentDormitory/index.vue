@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "xysh"
+        title: "xysh",
+        name: "学员宿舍",
+        icon: 'iconfont icon-shuju2'
     }
 }
 </script>

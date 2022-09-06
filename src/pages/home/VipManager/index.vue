@@ -7,7 +7,9 @@
 <script>
 export default {
     meta: {
-        title: "vip"
+        title: "vip",
+        name: "vip管理",
+        icon: "iconfont icon-VIP4"
     }
 }
 </script>

@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "sjtj"
+        title: "sjtj",
+        name: "数据统计",
+        icon: "iconfont icon-shuju"
     }
 }
 </script>

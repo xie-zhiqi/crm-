@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "xyxmgl"
+        title: "xyxmgl",
+        name: "项目管理",
+        icon: 'iconfont icon-wode1'
     }
 }
 </script>

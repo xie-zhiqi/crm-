@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "glsy"
+        title: "glsy",
+        name: "管理首页",
+        icon: 'iconfont icon-shouye'
     }
 }
 </script>

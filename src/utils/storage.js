@@ -24,7 +24,11 @@ let set = (key, value) => {
         console.error("key 和 value 必须传")
     }
 }
+let rm = key => {
+    localStorage.removeItem(key)
+}
 export default {
     get,
-    set
+    set,
+    rm
 }

@@ -7,7 +7,9 @@
 <script>
 export default {
     meta: {
-        title: "xygl"
+        title: "xygl",
+        name: "学员管理",
+        icon: 'iconfont icon-xueyuan'
     }
 }
 </script>

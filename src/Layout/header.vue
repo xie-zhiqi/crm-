@@ -5,14 +5,31 @@
         </el-col>
         <el-col :span="6">
             <div class="grid-content bg-purple-light">
-                <h1>CRM管理系统</h1>
+                <!-- <h1>CRM管理系统</h1> -->
+                <div class="grid-content bg-purple"></div>
             </div>
         </el-col>
         <el-col :span="6">
-            <div class="grid-content bg-purple"></div>
+            <div class="grid-content bg-purple">
+                <a href="#" @click="quit">退出</a>
+            </div>
         </el-col>
     </el-row>
 </template>
+<script>
+export default {
+    methods: {
+        quit() {
+            // 清楚token
+            localStorage.removeItem("token")
+            // 跳转login页面
+            this.$router.push("/login")
+            // 刷新页面
+            location.reload()
+        }
+    }
+}
+</script>
 <style scoped lang="less">
 .el-row {
     margin-bottom: 20px;

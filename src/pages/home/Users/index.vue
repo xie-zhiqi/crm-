@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "yhgl"
+        title: "yhgl",
+        name: "用户管理",
+        icon: "iconfont icon-icon-test"
     }
 }
 </script>

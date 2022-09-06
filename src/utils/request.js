@@ -36,6 +36,15 @@ http.interceptors.response.use(config => {
             })
         }
     }
+    // 10022 1004 这两个状态码分别对应了token过期和session过期
+    // 10026 没有权限
+    // 清掉本地缓存 清掉token
+    let { code } = config.data;
+    if (code == "10022" || code == "1004") {
+        Message.error("登入过期 请重新登入")
+        storage.rm("token")
+        location.reload()
+    }
 
     return config // 如果不retrun axios请求就拿不到响应结果
 })

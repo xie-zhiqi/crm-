@@ -88,6 +88,6 @@ function convertTree(repeatRoutes) {
 
 let res = convertTree(repeatRoutes)
 
-console.log(res)
+// console.log(res)
 
 export default [...res]

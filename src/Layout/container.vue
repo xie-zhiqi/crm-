@@ -1,7 +1,7 @@
 <template>
     <div class="layoutcont">
         <el-container>
-            <el-aside width="200px">Aside</el-aside>
+            <Aside></Aside>
             <el-container>
                 <el-header>
                     <headerlayout></headerlayout>
@@ -15,9 +15,11 @@
 </template>
 <script>
 import headerlayout from "@/Layout/header.vue"
+import Aside from "./Aside.vue";
 export default {
     components: {
-        headerlayout
+        headerlayout,
+        Aside
     }
 }
 
@@ -33,7 +35,7 @@ export default {
 }
 
 .el-aside {
-    background-color: #D3DCE6;
+    /* background-color: #D3DCE6; */
     color: #333;
     text-align: center;
     line-height: 200px;

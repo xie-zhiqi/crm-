@@ -2,7 +2,7 @@ import * as api from "@/api/permission"
 import allRoutes from "@/router/generateRoutes"
 import recusionRoutes from "@/router/recursionRoutes"
 // 引入路由
-import router from "@/router"
+import router from "@/utils/routerGuard"
 // 引入动态路由
 import dynamicRoute from "@/router/dynamicRoutes"
 let routes = allRoutes.find(route => route.name === "home")
@@ -25,7 +25,7 @@ export default {
         FETCH_MENU_LIST({ commit }) {
             return api.getMenuListApi()
                 .then(res => {
-                    console.log(res.data.menuList)
+                    // console.log(res.data.menuList)
                     let userMenu = recusionRoutes(res.data.menuList, routes.children)
                     commit("SET_USER_MENU", userMenu)
                 })

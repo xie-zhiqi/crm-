@@ -5285,6 +5285,11 @@ punycode@^2.1.0:
   resolved "https://registry.npmmirror.com/punycode/-/punycode-2.1.1.tgz"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
+qf-sub-menu@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmmirror.com/qf-sub-menu/-/qf-sub-menu-1.1.1.tgz#fdaf439f670bb78165220abb055d82378050c6a1"
+  integrity sha512-7lQ3on4mnPACDKvssvr8DknNn1upwhWOXx8hM4MCme83H5ThcNksPSOQuwO9DEiUKW277rAmLuikiiUC055Lcg==
+
 qrcode@^1.5.1:
   version "1.5.1"
   resolved "https://registry.npmmirror.com/qrcode/-/qrcode-1.5.1.tgz#0103f97317409f7bc91772ef30793a54cd59f0cb"

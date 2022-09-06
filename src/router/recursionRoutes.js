@@ -5,8 +5,8 @@
  * @param {Array} routes 
  */
 const recursionRoutes = (menuList, routes) => {
-    console.log("menuList", menuList)
-    console.log("routes", routes)
+    // console.log("menuList", menuList)
+    // console.log("routes", routes)
     let userMenu = []; //存储计算结果
     menuList.forEach(menu => {
         routes.forEach(route => {
@@ -18,7 +18,7 @@ const recursionRoutes = (menuList, routes) => {
             }
         })
     })
-    console.log(userMenu)
+    // console.log(userMenu)
     return userMenu
 }
 export default recursionRoutes

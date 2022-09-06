@@ -4,7 +4,9 @@
 <script>
 export default {
     meta: {
-        title: "vipCharge"
+        title: "vipCharge",
+        name: "vip充值",
+        icon: "iconfont icon-chongzhi"
     }
 }
 </script>
