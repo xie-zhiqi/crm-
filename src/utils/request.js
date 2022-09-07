@@ -1,6 +1,7 @@
 // 配置axios
 import axios from "axios"
-import { Message, MessageBox } from 'element-ui';
+import aa, { Message, MessageBox, Loading } from 'element-ui';
+// console.log(aa)
 import storage from "@/utils/storage"
 let http = axios.create({
     baseURL: "/api",
@@ -10,12 +11,21 @@ let http = axios.create({
 })
 
 // 全局请求拦截拦截器  对接口的请求批量进行统一处理
+let fullScreenLoading = null
 http.interceptors.request.use(config => {
     // 先获取本地的tokne，然后携带给后端
     let token = storage.get('token');
-    // console.log(token)
+    // console.log(config)
     config.headers['Authorization'] = token;
 
+    if (config.url.indexOf("login") !== -1 || config.url.indexOf("wechatLogin") !== -1) {
+        fullScreenLoading = Loading.service({
+            lock: true,
+            text: 'Loading',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+        })
+    }
     // config就是所有的请求配置
     return config // 放行
 })
@@ -25,6 +35,10 @@ http.interceptors.request.use(config => {
 
 http.interceptors.response.use(config => {
 
+    if (fullScreenLoading) {
+        fullScreenLoading.close()
+        fullScreenLoading = null
+    }
     // console.log("config", config)
     let { msg, state } = config.data
     if (config.data.msg) {
