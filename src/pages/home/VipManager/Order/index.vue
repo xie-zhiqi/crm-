@@ -34,8 +34,12 @@
         </el-table-column>
         <el-table-column label="操作" align="center">
             <template v-slot="{row}">
-                <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                <el-button type="primary" align="center" icon="iconfont icon-chongzhi"
+                    v-hasPay="[row.pay_status,row.order_status]" @click="handleEdit(scope.$index, scope.row)">去支付
+                </el-button>
+                <el-button type="danger" icon="el-icon-delete" align="center"
+                    @click="handleDelete(scope.$index, scope.row)">删除
+                </el-button>
             </template>
         </el-table-column>
     </el-table>
@@ -64,6 +68,23 @@ export default {
                 })
         }
     },
+    directives: {
+        hasPay: {
+            inserted(el, binding) {
+                let [pay_status, order_status] = binding.value;
+                // 先保存当前按钮类名
+                let className = el.className;
+                // 当pay_status不是0的时候
+                // order_status不是1的时候
+                // 禁用按钮
+                // order_status 0未提交 1已提交 2已经取消 3无效订单 4交易关闭 5退货
+                if (pay_status !== 0 || order_status !== 1) {
+                    el.disabled = true; // 禁用按钮
+                    el.className = className + "primary";
+                }
+            }
+        }
+    },
     created() {
         // 获取
         this.getOrderList()
@@ -82,5 +103,12 @@ export default {
 /deep/.el-avatar>img {
     height: 30% !important;
     text-align: center;
+}
+
+/deep/.cell {
+    display: flex !important;
+    justify-content: center;
+    align-content: space-around;
+    flex-direction: column;
 }
 </style>
